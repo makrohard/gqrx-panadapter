@@ -55,7 +55,11 @@ def main():
             rs.send(b'f\n')
 
             rigfreq = int(rs.recv(1024))
-            lnbfreq = rigfreq - int(args.ifreq * 1e6)
+            ifreq = int(args.ifreq * 1e6)
+            if ifreq > 0:
+                lnbfreq = rigfreq - ifreq
+            else:
+                lnbfreq = rigfreq + ifreq
 
             gs.send('LNB_LO {} \r\n'.format(lnbfreq).encode('utf-8'))
             gs.recv(1024)

@@ -57,7 +57,7 @@ def main():
             rigfreq = int(rs.recv(1024))
             lnbfreq = rigfreq - int(args.ifreq * 1e6)
 
-            gs.send('LNB_LO {}'.format(lnbfreq).encode())
+            gs.send('LNB_LO {} \r\n'.format(lnbfreq).encode('utf-8'))
             gs.recv(1024)
 
             time.sleep(args.interval / 1000.0)
